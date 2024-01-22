@@ -1,0 +1,48 @@
+/* ---------------------------Global CSS--------------------------- */
+body{
+    font-family: cursive;
+    color: gray;
+}
+.navbar a , .btn{
+    color: gray;
+}
+h2{
+    font-weight: 550;
+    margin: 10px 0px 10px 10px;   
+    color: black;
+}
+h3{
+    color: black;
+}
+a{
+    font-weight: 600;
+}
+p{
+    font-weight: 500;
+    margin: 20px 0px 10px 10px;   
+}
+/* ---------------------------------------styling for navbar--------------------------- */
+.btn:hover{
+    background-color: seagreen;
+    color: white;
+}
+.navbar a{
+    border-radius: 0.5rem;
+    margin: 0px 5px 0px 5px;    
+}
+.navbar a:hover{
+ background-color: seagreen;
+ color: white;
+}
+/* ---------------------------styling for Header section----------------------------- */
+.Header{
+    margin-top: 30px;
+}
+.Header .green{
+    color: seagreen;
+}
+/* -----------------------------------styling for card---------------------------------- */
+.card-body{
+ color: gray;
+ background-color: lightgray;
+}

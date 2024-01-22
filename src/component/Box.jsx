@@ -1,9 +1,11 @@
 import React from 'react'
 
-export default function Box() {
+const Box = () => {
   return (
     <div>
-      Test
+      <h1>Hello Ahmad Ali</h1>
     </div>
   )
 }
+
+export default Box

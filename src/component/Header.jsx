@@ -9,10 +9,12 @@ const Header = () => {
           Articals For <br />
           <div className="green">front-end devs</div>
         </h2>
-        <p>Articles on web performance responsive web design and more</p>
+        <p className="m-auto">
+          Articles on web performance responsive web design and more
+        </p>
       </div>
-      <div className="col-12 col-sm-6">
-        <img src={img} height={250} />
+      <div className="col-12 col-sm-6 m-auto">
+        <img src={img} className="img-fluid mb-3" alt="..." />
       </div>
     </div>
   );

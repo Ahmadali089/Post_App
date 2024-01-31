@@ -2,38 +2,38 @@
 // import "./App.css";
 // import { useState } from "react";
 // import { Routers } from "./component/Routers";
-
-import Data from "./component/Data";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { data } from "./component/data.jsx";
 import Header from "./component/Header";
-import ProjectNavbar from "./component/ProjectNavbar";
+// import ProjectNavbar from "./component/ProjectNavbar";
+import Details from "./component/Details";
+import MainPost from "./component/MainPost";
+import YourComponent from "./component/ProjectNavbar";
+import Addpost from "./component/Addpost";
+// import Services from "./component/Services";
+// import Work from "./component/Work";
+// import { Routers } from "./component/Routers";
 
 const App = () => {
   return (
     <>
-      {/* <div className="bg-secondary py-3">
-        <header className="container d-flex justify-content-between align-items-center">
-          <a href="#">Logo</a>
-          <nav>
-            <ul className="list-unstyled d-flex align-items-center mb-0">
-              <li className="me-3">
-                <NavLink to="/">Home</NavLink>
-              </li>
-              <li className="me-3">
-                <NavLink to="about">About</NavLink>
-              </li>
-              <li className="me-3">
-                <NavLink to="contact">Contact</NavLink>
-              </li>
-            </ul>
-          </nav>
-        </header>
-        <Routers />
-      </div> */}
-      <div>
-        <ProjectNavbar />
-        <Header />
-        <Data />
-      </div>
+      {/* <ProjectNavbar /> */}
+      <YourComponent />
+
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Header /> <MainPost />
+              </>
+            }
+          ></Route>
+          <Route path="/post/:id" element={<Details />}></Route>
+        </Routes>
+      </Router>
+      <Addpost />
     </>
   );
 };

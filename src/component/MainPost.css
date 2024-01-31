@@ -1,0 +1,36 @@
+i {
+	color: aquamarine;
+}
+
+.container {
+	max-width: 800px; /* Adjust as needed */
+}
+
+.card {
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+	font-size: 1.2rem;
+	margin-bottom: 0.5rem;
+}
+
+.card-text {
+	color: #555;
+}
+
+.btn-danger {
+	background-color: #dc3545;
+	border-color: #dc3545;
+}
+
+.btn-danger:hover {
+	background-color: #c82333;
+	border-color: #bd2130;
+}

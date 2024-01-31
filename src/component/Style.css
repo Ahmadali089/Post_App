@@ -46,3 +46,6 @@ p{
  color: gray;
  background-color: lightgray;
 }
+.card-body:hover{
+    background-color: lightpink;
+}

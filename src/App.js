@@ -10,6 +10,8 @@ import Details from "./component/Details";
 import MainPost from "./component/MainPost";
 import YourComponent from "./component/ProjectNavbar";
 import Addpost from "./component/Addpost";
+import Editpost from "./component/Editpost";
+// import CalculatorApp from "./component/CalculatorApp";
 // import Services from "./component/Services";
 // import Work from "./component/Work";
 // import { Routers } from "./component/Routers";
@@ -31,9 +33,11 @@ const App = () => {
             }
           ></Route>
           <Route path="/post/:id" element={<Details />}></Route>
+          <Route path="/Addpost/" element={<Addpost />}></Route>
+          <Route path="/Editpost/" element={<Editpost />}></Route>
         </Routes>
       </Router>
-      <Addpost />
+      {/* <CalculatorApp /> */}
     </>
   );
 };

@@ -1,44 +1,67 @@
 * {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    font-family: Georgia, "Times New Roman", Times, serif;
-  }
-  .calculatorBody {
-    width: 100%;
-    height: 100vh;
-    text-align: center;
-    background: linear-gradient(45deg, #0a0a0a, #3a4452);
-  }
-  .CALCULATOR {
-    border: 1px solid #717377;
-    padding: 20px;
-    border-radius: 16px;
-    background: white;
-    box-shadow: 0px 3px 15px white;
-  }
-  input {
-    width: 310px;
-    height: 90px;
-    border: 1px solid black;
-    border-radius: 20px;
-    padding: 24px;
-    margin: 10px;
-    font-size: 40px;
-    text-align: right;
-    cursor: pointer;
-  }
-  input::placeholder {
-    color: black;
-  }
-  .calculatorBody button {
-    border: none;
-    width: 60px;
-    height: 60px;
-    margin: 10px;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  /* font-family: Georgia, "Times New Roman", Times, serif; */
+}
+.calculatorBody {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  background: linear-gradient(45deg, #0a0a0a, #3a4452);
+}
+.CALCULATOR {
+  border: 1px solid #717377;
+  padding: 20px;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0px 3px 15px white;
+}
+input {
+  width: 310px;
+  height: 150px;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 24px;
+  margin: 10px;
+  font-size: 40px;
+  text-align: right;
+  cursor: pointer;
+}
+input::placeholder {
+  color: black;
+}
+.calculatorBody button {
+  border: none;
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+}
+.result{
+  /* background-color: white; */
+  margin-top: -40px;
+  margin-bottom: 40px;
+}
+.history{
+  background-color: white;
+  margin-left: 350px;
+  margin-top: 10px;
+  border-radius: 20px;
+  width: 500px;
+  /* height: 400px; */
+}
+.number:hover{
+  background-color: orange;
+  color: white;
+}
+.oprationButton{
+  background-color: orange;
+  color: white;
+}
+.oprationButton:hover{
+ background-color: white;
+ color: black;
+}

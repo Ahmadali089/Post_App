@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import Button from "@mui/material/Button";
 const Addpost = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -14,8 +14,13 @@ const Addpost = () => {
     setLoading(true);
     const blog = { title, body, userId };
     // Check if body length meets the minimum requirement
-    if (body.length < 500) {
-      alert("Body must be at least 500 characters long");
+    if (body.length < 5) {
+      alert("Body must be at least 5 characters long");
+      setLoading(false); // Stop loading
+      return; // Prevent submission
+    }
+    if (body.length > 500) {
+      alert("Body must be less than 500 characters");
       setLoading(false); // Stop loading
       return; // Prevent submission
     }
@@ -58,9 +63,7 @@ const Addpost = () => {
   return (
     <div>
       <Link to="/">
-        <button type="text" className="btn btn-primary">
-          &larr;
-        </button>
+        <Button variant="contained">&larr;</Button>
       </Link>
       <h2>Add a post</h2>
       {successMessage && (
@@ -69,8 +72,12 @@ const Addpost = () => {
       <form onSubmit={handleSubmit} className="container">
         <div className="mb-3">
           {loading && (
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
+            <div>
+              <div className="d-flex justify-content-center">
+                <div className="spinner-border" role="status">
+                  <span className="sr-only"></span>
+                </div>
+              </div>
             </div>
           )}
           <label htmlFor="exampleInputEmail1" className="form-label">

@@ -1,129 +1,177 @@
-import "./MainPost.css";
-// import { data } from "./data.jsx";
-import { useState, React, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "./MainPost.css";
+import CircularProgress from "@mui/material/CircularProgress";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 function MainPost() {
-  // const navigator=Navigate()
-  // if(data)
-  // {
-  // 	navigator("/post/")
-  // }
   const [stateData, setStateData] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
-  const [loder, setLoder] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(false);
+  const [loading3, setLoading3] = useState(false);
+  const [start, setStart] = useState(0);
+  const [limit] = useState(10);
+
   const handleDelete = (index) => {
     setSelectedPost(index);
   };
+
   const confirmDelete = () => {
-    const updatedStateData = [...stateData];
-    updatedStateData.splice(selectedPost, 1);
-    setStateData(updatedStateData);
-    console.log(selectedPost);
-  };
-  useEffect(() => {
-    setLoder(true);
+    const postIdToDelete = stateData[selectedPost].id;
+    setLoading3(true);
     axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then((res) => setStateData(res.data.slice(0, 10)))
+      .delete(`https://jsonplaceholder.typicode.com/posts/${postIdToDelete}`)
+      .then((response) => {
+        if (response.status === 200) {
+          const updatedStateData = [...stateData];
+          updatedStateData.splice(selectedPost, 1);
+          setStateData(updatedStateData);
+        } else {
+          console.error("Error deleting post. Status:", response.status);
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting post:", error);
+      })
       .finally(() => {
-        setLoder(false);
+        setLoading3(false);
+        setSelectedPost(null);
       });
-  }, []);
+  };
+
+  const cancelDelete = () => {
+    setSelectedPost(null);
+  };
+
+  const handleNext = () => {
+    setLoading2(true);
+    setStart(start + limit);
+  };
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://jsonplaceholder.typicode.com/posts?_start=${start}&_limit=${limit}`
+      )
+      .then((response) => {
+        let updatedStateData = stateData.concat(response.data);
+        setStateData(updatedStateData);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+    setLoading(false);
+    setLoading2(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [start]);
 
   return (
     <>
-      {loder === true ? (
-        <div>
-          <div className="d-flex justify-content-center">
-            <div className="spinner-border" role="status">
-              <span className="sr-only"></span>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <section className="container mt-5">
+      <section className="container mt-5">
+        <div className="text-center mb-4">
           <h2 className="text-center mb-4">Posts</h2>
-          <Link to="/Addpost" className="me-2">
-            Add post
+          <Link to="/AddPost" className="btn btn-success">
+            Add Post
           </Link>
+        </div>
+        {loading ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "20px",
+            }}
+          >
+            <CircularProgress
+              style={{ color: "blue", height: 100, width: 100 }}
+            />
+          </div>
+        ) : (
           <div>
             {stateData.map((item, index) => (
-              <div key={index} className="col">
-                <h5>Post {item.id}</h5>
-                <p>{item.title}</p>
-                <p>{item.body}</p>
-
-                {/* <input type="text" value={item.id} /> */}
-                <div className="d-flex justify-content-end">
-                  <Link
-                    to={`/post/${item.id}`}
-                    className="btn btn-primary me-2"
-                  >
-                    Read more
-                  </Link>
-
-                  <Link
-                    to="/Editpost/"
-                    state={{ state: item }}
-                    className=" me-2"
-                  >
-                    Edit post
-                  </Link>
-                  <>
-                    {/* Button to Open the Modal */}
-                    <button
-                      type="button"
-                      className="btn btn-primary"
-                      data-bs-toggle="modal"
-                      data-bs-target="#myModal"
-                      onClick={() => handleDelete(index)}
-                    >
-                      Delete
-                    </button>
-                    {/* The Modal */}
-                    <div className="modal" id="myModal">
-                      <div className="modal-dialog">
-                        <div className="modal-content">
-                          {/* Modal Header */}
-                          <div className="modal-header">
-                            <h4 className="modal-title">Modal Heading</h4>
-                            <button
-                              type="button"
-                              className="btn-close"
-                              data-bs-dismiss="modal"
-                            />
-                          </div>
-                          {/* Modal body */}
-                          <div className="modal-body">
-                            <h2>Are you sure to want to delete this post</h2>
-                            <button
-                              data-bs-dismiss="modal"
-                              className="btn btn-danger"
-                              onClick={() => confirmDelete()}
-                            >
-                              Delete
-                            </button>
-                            <button
-                              type="button"
-                              className="btn btn-danger m-3"
-                              data-bs-dismiss="modal"
-                            >
-                              Close
-                            </button>
-                          </div>
-                          {/* Modal footer */}
-                          <div className="modal-footer"></div>
-                        </div>
+              <div key={index} className="row my-5">
+                <div className="col">
+                  <div className="card h-100">
+                    <div className="card-body">
+                      <h5 className="card-title">Post {item.id}</h5>
+                      <p className="card-text">{item.title}</p>
+                      <p className="card-text">{item.body}</p>
+                    </div>
+                    <div className="card-footer d-flex justify-content-between align-items-center">
+                      <Link to={`/post/${item.id}`} className="btn btn-primary">
+                        Read more
+                      </Link>
+                      <div>
+                        <Link
+                          to={`/Editpost/${item.id}`}
+                          className="btn btn-primary me-2"
+                        >
+                          Edit Post
+                        </Link>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => handleDelete(index)}
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
-                  </>
+                    {selectedPost === index && (
+                      <div className="confirmation-div">
+                        <p>Are you sure you want to delete this post?</p>
+                        <button
+                          className="btn btn-danger"
+                          onClick={confirmDelete}
+                        >
+                          Confirm
+                        </button>
+                        <button
+                          className="btn btn-secondary"
+                          onClick={cancelDelete}
+                        >
+                          Cancel
+                        </button>
+                        {loading3 && (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              marginTop: "20px",
+                            }}
+                          >
+                            <CircularProgress style={{ color: "blue" }} />
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
+
+            <div className="confirmation-div mb-5">
+              <button onClick={handleNext} className="btn btn-secondary">
+                Next
+              </button>
+              {loading2 && (
+                <div
+                  style={{
+                    display: "inline-block",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <CircularProgress style={{ color: "blue" }} />
+                </div>
+              )}
+            </div>
           </div>
-        </section>
-      )}
+        )}
+      </section>
     </>
   );
 }

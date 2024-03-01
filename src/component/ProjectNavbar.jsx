@@ -1,6 +1,7 @@
 import React from "react";
 // import logo from "./imgs/logo.png";
 import "./Style.css";
+// import { colors } from "@mui/material";
 // import { Link } from "react-router-dom";
 function ProjectNavbar() {
   return (
@@ -50,7 +51,11 @@ function ProjectNavbar() {
                   </li>
                 </ul>
                 <form className="d-flex">
-                  <button className="btn btn-outline-success" type="submit">
+                  <button
+                    className="btn btn-primary"
+                    type="submit"
+                    // style={{ color: "blue" }}
+                  >
                     Planner
                   </button>
                 </form>
